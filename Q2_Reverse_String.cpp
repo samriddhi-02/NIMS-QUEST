@@ -37,14 +37,13 @@ input and output format, then compile and test your corrected program.
 using namespace std;
 
 int main() {
-    // Read a complete line so that spaces remain part of the message.
     string message;
     getline(cin, message);
 
-    // Emit the message characters in reverse order.
-    for (int i = static_cast<int>(message.size()) - 1; i > 0; --i) {
+    for (int i = static_cast<int>(message.size()) - 1; i >= 0; --i) {
         cout << message[i];
     }
     cout << '\n';
+
     return 0;
 }

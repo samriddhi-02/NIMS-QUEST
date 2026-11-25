@@ -46,40 +46,42 @@ input and output format, then compile and test your corrected program.
 using namespace std;
 
 int main() {
-    // Read the tree nodes in their level-order array representation.
     int n;
     cin >> n;
+
     vector<int> values(n);
     for (int i = 0; i < n; ++i) {
         cin >> values[i];
     }
 
-    // Visit the tree breadth-first and collect one group per level.
     queue<int> pending;
     pending.push(0);
+
     while (!pending.empty()) {
         int levelSize = static_cast<int>(pending.size());
-        vector<int> level;
+
         for (int i = 0; i < levelSize; ++i) {
             int index = pending.front();
             pending.pop();
-            level.push_back(values[index]);
 
-            int left = 2 * index + 1;
-            int right = 2 * index + 2;
-            if (left < n) {
-                pending.push(left);
-            }
-        }
-
-        // Print the values for the current level.
-        for (int i = 0; i < static_cast<int>(level.size()); ++i) {
             if (i > 0) {
                 cout << ' ';
             }
-            cout << level[i];
+            cout << values[index];
+
+            int left = 2 * index + 1;
+            int right = 2 * index + 2;
+
+            if (left < n) {
+                pending.push(left);
+            }
+            if (right < n) {
+                pending.push(right);
+            }
         }
+
         cout << '\n';
     }
+
     return 0;
 }
